@@ -1,0 +1,108 @@
+---
+title: "Emergency"
+output: html_document
+date: "2023-08-21"
+---
+
+```{r}
+dfpatient=read.csv('Data/emergency.csv')
+dfpatient
+```
+```{r}
+str(dfpatient)
+colnames(dfpatient)
+```
+```{r}
+categorical_cols=c("Condition","Insurance")
+categorical_cols
+
+dfpatient[, categorical_cols]=lapply(dfpatient[, categorical_cols],as.factor)
+str(dfpatient)
+
+print(table(dfpatient$Condition))
+print(table(dfpatient$Insurance))
+```
+```{r}
+mean(dfpatient$Condition == 'good')*100
+mean(dfpatient$Condition == 'fair')*100
+mean(dfpatient$Condition == 'serious')*100
+```
+
+```{r}
+mean(dfpatient$Insurance == 'insured')*100
+mean(dfpatient$Insurance == 'not insured')*100
+```
+
+```{r}
+mean(dfpatient$Insurance == 'insured' & dfpatient$Condition == 'serious')*100
+# this is wrong way to deal because it consider whole dataset where as needed only for the insured data
+
+
+#we can deal in this way also
+mean((dfpatient$Insurance == 'insured' & dfpatient$Condition == 'serious')/mean(dfpatient$Insurance=='insured'))*100
+
+```
+
+```{r}
+mean(dfpatient[dfpatient$Insurance=='insured', ]$Condition=='serious')*100
+```
+
+```{r}
+mean(dfpatient[dfpatient$Condition=='serious', ]$Insurance=='insured')*100
+```
+
+
+```{r}
+mean(dfpatient$Insurance=='insured')*100
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+dfpatient$Condition=factor(dfpatient$Condition)
+dfpatient$Insurance=factor(dfpatient$Insurance)
+
+levels(dfpatient$Condition)
+levels(dfpatient$Insurance)
+
+contrasts(dfpatient$Condition)
+contrasts(dfpatient$Insurance)
+```
+
+
+```{r}
+condition_proportions=table(dfpatient$Condition)/nrow(dfpatient)
+
+good=condition_proportions["good"]
+fair=condition_proportions["fair"]
+serious=condition_proportions["serious"]
+
+print(good)
+print(fair)
+print(serious)
+```
+```{r}
+insurance_proportions=table(dfpatient$Insurance)/nrow(dfpatient)
+
+insured=insurance_proportions["insured"]
+not_insured=insurance_proportions["not insured"]
+
+print(insured)
+print(not_insured)
+```
+```{r}
+
+```
+

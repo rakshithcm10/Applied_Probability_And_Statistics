@@ -1,0 +1,39 @@
+---
+title: "birthday_problem"
+output: html_document
+date: "2023-08-09"
+---
+
+
+```{r}
+num_students=28
+days_in_year=365
+```
+
+```{r}
+simulate_class=function(num_students, days_in_year) {
+  birthdays=sample(1:days_in_year, num_students, replace = TRUE)
+  return(birthdays)
+}
+```
+
+```{r}
+check_duplicate_birthdays=function(birthdays) {
+  return(length(birthdays) != length(unique(birthdays)))
+}
+```
+
+```{r}
+num_simulations=100000
+simulated_results=replicate(num_simulations, {
+  class_birthdays=simulate_class(num_students, days_in_year)
+  check_duplicate_birthdays(class_birthdays)
+})
+```
+
+```{r}
+probability=mean(simulated_results)*100
+probability
+```
+
+

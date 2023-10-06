@@ -1,0 +1,515 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Discrete Random Variables},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Discrete Random Variables}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Scenario}: A salesman has scheduled two appointments to sell
+software, one in the morning and another one in the afternoon. There are
+two software editions available: the base edition costing Rs. 500 and
+the premium edition costing Rs. 1000. His morning appointments typically
+lead to a sale with a 30\% chance while the afternoon ones typically
+lead to a sale with a 60\% chance independent of what happened in the
+morning. If the morning appointment ends up in sale, the salesman has a
+70\% chance of selling the premium edition and if the afternoon
+appointment ends up in a sale, he is equally likely to sell either of
+the editions. Let X be the random variable representing the total Rupee
+value of sales. What are the different values that X can take? Calculate
+the probability that X takes the value 5000?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sampling space for appointment success (0 corresponds to no sale, 1 corresponds to a sale)}
+\NormalTok{s\_appointment }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# Appointment success and failure probabilities}
+\NormalTok{p\_morning }\OtherTok{=} \FloatTok{0.30} \CommentTok{\# Success probability of sales in morning}
+\NormalTok{p\_afternoon }\OtherTok{=} \FloatTok{0.60}  \CommentTok{\# Success probability of sales in afternoon}
+\NormalTok{p\_appointment }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow  =} \DecValTok{2}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p\_morning,p\_morning ,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p\_afternoon ,p\_afternoon), }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Sampling space for software type}
+\NormalTok{s\_software }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{5000}\NormalTok{,}\DecValTok{10000}\NormalTok{)}
+  
+\CommentTok{\# Software type probabilities}
+\NormalTok{p\_software}\OtherTok{=}\FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow=}\DecValTok{2}\NormalTok{,}\AttributeTok{ncol=}\DecValTok{2}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\FloatTok{0.3}\NormalTok{,}\FloatTok{0.7}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{),}\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Function that simulates one trial of the random experiment which is}
+\CommentTok{\# what the salesman earns on a random day}
+\NormalTok{salesResult }\OtherTok{=} \ControlFlowTok{function}\NormalTok{()\{}
+\NormalTok{  result }\OtherTok{=} \FunctionTok{numeric}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+  \CommentTok{\# Simulate whether sales happen in morning and afternoon appointments}
+  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{))\{}
+\NormalTok{    result[j] }\OtherTok{=} \FunctionTok{sample}\NormalTok{(s\_appointment,}\AttributeTok{size=}\DecValTok{1}\NormalTok{,}\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{prob=}\NormalTok{p\_appointment[j, ])}
+\NormalTok{  \}}
+\NormalTok{  earnings }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(result[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,}\FunctionTok{sample}\NormalTok{(s\_software,}\AttributeTok{size=}\DecValTok{1}\NormalTok{, }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{prob=}\NormalTok{p\_software[}\DecValTok{1}\NormalTok{,]),}\DecValTok{0}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{ifelse}\NormalTok{(result[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,}\FunctionTok{sample}\NormalTok{(s\_software,}\AttributeTok{size=}\DecValTok{1}\NormalTok{,}\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{prob=}\NormalTok{p\_software[}\DecValTok{2}\NormalTok{, ]),}\DecValTok{0}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(earnings)}
+\NormalTok{\}}
+
+\CommentTok{\# Number of simulations}
+\NormalTok{nsimulations }\OtherTok{=} \FloatTok{1e5}
+\NormalTok{simulatedData }\OtherTok{=} \FunctionTok{replicate}\NormalTok{(nsimulations, }\FunctionTok{salesResult}\NormalTok{())}
+
+\CommentTok{\# probability that the salesman takes 5000}
+\FunctionTok{mean}\NormalTok{(simulatedData}\SpecialCharTok{==}\DecValTok{5000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.245
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# probability that  the salesman earns}
+\FunctionTok{table}\NormalTok{(simulatedData)}\SpecialCharTok{/}\NormalTok{nsimulations}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## simulatedData
+##       0    5000   10000   15000   20000 
+## 0.28225 0.24500 0.31939 0.08951 0.06385
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Discrete random variable}: Let \(X\) represent thetotal earnings
+from one day whic is random; that is, \(X\) is a discrete random
+variable which can take the values \(0, 5000, 10000, 15000, 20000.\) The
+associated probabilities can be calculated as:
+
+\(\begin{align*}P(X = 0) &= 0.28,\\ P(X = 5000) &= 0.31,\\ P(X = 10000) &= 0.275,\\ P(X = 15000) &= 0.095,\\ P(X = 20000) &= 0.04.\end{align*}\)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Probability Mass Function (PMF)} of the random variable \(X\) is
+denoted as \(P_X(x),\) where \(x\) represents the possible values that
+the random variable \(X\) can take:
+
+\(\begin{align*}{\color{red}{P_X}}(0) &= P(X = 0) = 0.28,\\ {\color{red}{P_X}}(5000) &=P(X = 5000) = 0.31,\\ {\color{red}{P_X}}(10000) &=P(X = 10000) = 0.275,\\ {\color{red}{P_X}}(15000) &=P(X = 15000) = 0.095,\\ {\color{red}{P_X}}(20000) &=P(X = 20000) = 0.04.\end{align*}\)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert simulatedData into a dataframe}
+\NormalTok{dfSales }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(simulatedData)}
+
+
+\FunctionTok{colnames}\NormalTok{(dfSales) }\OtherTok{=}\StringTok{\textquotesingle{}Earning\textquotesingle{}}
+
+
+\NormalTok{p }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dfSales)}\SpecialCharTok{+}\FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Earning),}\AttributeTok{fill=}\StringTok{\textquotesingle{}steelblue\textquotesingle{}}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DiscreteRandomVariables_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfSales }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(simulatedData))}
+\CommentTok{\# Add names to the columns}
+\FunctionTok{colnames}\NormalTok{(dfSales) }\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Earning\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Frequency\textquotesingle{}}\NormalTok{)}
+\NormalTok{dfSales[}\StringTok{\textquotesingle{}Probability\textquotesingle{}}\NormalTok{] }\OtherTok{=}\NormalTok{ dfSales[}\StringTok{\textquotesingle{}Frequency\textquotesingle{}}\NormalTok{]}\SpecialCharTok{/}\NormalTok{nsimulations}
+\FunctionTok{head}\NormalTok{(dfSales, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Earning Frequency Probability
+## 1       0     28225     0.28225
+## 2    5000     24500     0.24500
+## 3   10000     31939     0.31939
+## 4   15000      8951     0.08951
+## 5   20000      6385     0.06385
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dfSales)}\SpecialCharTok{+}\FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Earning,}\AttributeTok{y=}\NormalTok{Frequency),}\AttributeTok{fill=}\StringTok{\textquotesingle{}steelblue\textquotesingle{}}\NormalTok{)}
+\NormalTok{p}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DiscreteRandomVariables_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+What is the salesman's expected earnings? What does it even mean to say
+``expected earning?'' It is a single number denoted as \(E[X]\) and
+referred to as the \emph{expected value of} \(X\) which can be
+calculated as follows:
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{From a simulation perspective}, it is simply an average of all
+  the simulated earnings:
+  \(\begin{align*}E[X] &\approx 0 \times\underbrace{\frac{\text{No. of times 0 appeared}}{\text{nsimulations}}}_{\text{approximation to }P_X(0)}+500 \times\underbrace{\frac{\text{No. of times 500 appeared}}{\text{nsimulations}}}_{\text{approximation to }P_X(500)}+1000 \times\underbrace{\frac{\text{No. of times 1000 appeared}}{\text{nsimulations}}}_{\text{approximation to }P_X(1000)}+1500 \times\underbrace{\frac{\text{No. of times 1500 appeared}}{\text{nsimulations}}}_{\text{approximation to }P_X(1500)}+2000 \times\underbrace{\frac{\text{No. of times 2000 appeared}}{\text{nsimulations}}}_{\text{approximation to }P_X(2000)}.\end{align*}\)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{From a theoretical perspective}, s it is defined as the weighted
+  sum of the possible values \(X\) can take with the corresponding
+  probabilities:
+\end{itemize}
+
+\(\begin{align*} E[X] &= \sum_xxP_X(x),\ \text{where }x = 0, 500, 1000, 1500, 2000\\\Rightarrow E[X] &= 0\times P_X(0)+500\times P_X(500)+1000\times P_X(1000)+1500\times P_X(1500)+2000\times P_X(2000).\end{align*}\)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+So, we see that the expected value of \(X\) is approximately the
+long-term average of the simulated (or realized) values of \(X.\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Expected earnings using simulated values}
+\FunctionTok{mean}\NormalTok{(simulatedData) }\CommentTok{\# long term average of the realizations of X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7038.55
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Expected earnings using the theoretical definition}
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{1500}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{0.28}\NormalTok{, }\FloatTok{0.27}\NormalTok{, }\FloatTok{0.315}\NormalTok{, }\FloatTok{0.09}\NormalTok{, }\FloatTok{0.045}\NormalTok{)}
+\FunctionTok{sum}\NormalTok{(x }\SpecialCharTok{*}\NormalTok{ p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 675
+\end{verbatim}
+
+How much could the salesman's earnings vary from the expected value of
+the earning calculated in the previous cell?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+To answer this question, let's first look at the quantity
+\(X-E[X] = X-675.\) Note that:
+
+\begin{itemize}
+\item
+  this is also a random variable with the possible values
+  \(0-675, 500-675, 1000-675, 1500-675, 2000-675\);
+\item
+  it can be thought of as the random variable that captures the
+  deviation of \(X\) from its expected value;
+\item
+  the associated probabilities are still the same as:
+
+  \begin{array}{c|c|c}
+  \hline
+  \color{blue}X&\color{blue}{X}-\color{cyan}{E[X]} = \color{blue}{X}-\color{cyan}{675}&\color{magenta}{\text{Probability}}\\
+  \hline
+  0 & -675 & 0.28\\
+  500 & -175 & 0.27\\
+  1000 & 325 & 0.315\\
+  1500 & 825 & 0.09\\
+  2000 & 1325 & 0.045
+  \end{array}
+
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+  Now, consider the quanityt \((X-E[X])^2 = (X-675)^2.\) Note that:
+\item
+  this is also a random variable with the possible values
+  \((0-675)^2, (500-675)^2, (1000-675)^2, (1500-675)^2, (2000-675)^2\);
+\item
+  it can be thought of as the random variable that captures the squared
+  deviation of \(X\) from its expected value;
+\item
+  the associated probabilities are still the same as:
+
+  \begin{array}{c|c|c}
+  \hline
+  \color{blue}X&(\color{blue}{X}-\color{cyan}{E[X]})^2 = (\color{blue}{X}-\color{cyan}{675})^2&\color{magenta}{\text{Probability}}\\
+  \hline
+  0 & (-675)^2 & 0.28\\
+  500 & (-175)^2 & 0.27\\
+  1000 & (325)^2 & 0.315\\
+  1500 & (825)^2& 0.09\\
+  2000 & (1325)^2 & 0.045
+  \end{array}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\(\color{green}{Variance}\) of the random variable \(X,\) denoted as
+\(\text{var}[X],\) is the expected squared deviation of \(X\) from its
+expected value. In simple terms, variance of \(X\) is the expected value
+of the random variable \((X-E[X])^2.\)
+
+\(\begin{align*}\text{Var}[X] &= E[\underbrace{(X-E[X])^2}_{\text{squared deviation random variable}}]\\&= \sum_x (x-E[X])^2\times P_X(x)\\& = (0-675)^2\times P_X(0)+(500-675)^2\times P_X(500)+(1000-675)^2\times P_X(1000)+(1500-675)^2\times P_X(1500)+(2000-675)^2\times P_X(2000)\\&=(0-675)^2\times 0.28+(500-675)^2\times 0.27+(1000-675)^2\times 0.315+(1500-675)^2\times 0.09+(2000-675)^2\times 0.045.\end{align*}\)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\(\color{green}{Standard\ deviation}\) of the random variable \(X,\)
+denoted as \(\text{SD}[X],\) is defined as the square root of its
+variance:
+
+\(\begin{align*}\text{SD}[X] &= \sqrt{\text{Var}[X]} = \sqrt{E\left[(X-E[X])^2\right]}\\&=\sqrt{(0-675)^2\times 0.28+(500-675)^2\times 0.27+(1000-675)^2\times 0.315+(1500-675)^2\times 0.09+(2000-675)^2\times 0.045}.\end{align*}\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variance of the earnings using simulated values}
+\CommentTok{\# long term average of this random variable (X{-}E[X])\^{}2}
+\CommentTok{\#simulatedData {-} mean(simulatedData) \# simulated deviations}
+\CommentTok{\#(simulatedData {-} mean(simulatedData))\^{}2 \# simulated squared deviations}
+\FunctionTok{mean}\NormalTok{(simulatedData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7038.55
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{((simulatedData }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(simulatedData))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\CommentTok{\# variance calculated using simulation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 34202564
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Standard deviation of the earnings using simulated values}
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{((simulatedData }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(simulatedData))}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5848.296
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{\textquotesingle{} \textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] " "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Expected value using the theoretical definition}
+\FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 675
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Variance of the earnings using the thoretical definition}
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{1500}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{0.28}\NormalTok{, }\FloatTok{0.27}\NormalTok{, }\FloatTok{0.315}\NormalTok{, }\FloatTok{0.09}\NormalTok{, }\FloatTok{0.045}\NormalTok{)}
+\FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p))}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 309375
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Standard deviation of the earnings using the theoretical definition}
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p))}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ p))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 556.2149
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{1500}\NormalTok{, }\DecValTok{2000}\NormalTok{)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{0.28}\NormalTok{, }\FloatTok{0.27}\NormalTok{, }\FloatTok{0.315}\NormalTok{, }\FloatTok{0.09}\NormalTok{, }\FloatTok{0.045}\NormalTok{)}
+
+\CommentTok{\# Deviations from the expected value}
+\NormalTok{x }\SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -675 -175  325  825 1325
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Squared deviations from the expected value}
+\NormalTok{(x }\SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p))}\SpecialCharTok{\^{}}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  455625   30625  105625  680625 1755625
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Expected value of the squared deviations from the expected value}
+\FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(x}\SpecialCharTok{*}\NormalTok{p))}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 309375
+\end{verbatim}
+
+\end{document}

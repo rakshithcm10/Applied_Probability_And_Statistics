@@ -1,0 +1,66 @@
+---
+title: "Criminal Problem"
+output: html_document
+date: "2023-08-07"
+---
+
+```{r}
+# Sampling space
+s=c(1,0)
+
+#corresponding probabilities
+p=matrix(nrow=5, ncol=2,c(0.95,0.95,0.9,0.9,0.8,0.05,0.05,0.1,0.1,0.2))
+#print(p)
+
+sample(s,size=100, replace=TRUE, prob = p[1, ])
+```
+
+```{r}
+#simulate the random experiment of the 5 judges making decisions
+judgement=function(){
+  result=numeric(5)
+  for(j in c(1:5)){
+    result[j]=sample(s,size=1,replace = TRUE,prob=p[j, ])
+  }
+  return(result)
+}
+```
+
+```{r}
+nsimulation=100000
+simulatedData=replicate(nsimulation,judgement())
+str(simulatedData)
+```
+
+```{r}
+checkEvent=function(data){
+  return(sum(data)<3)
+}
+```
+
+```{r}
+mean(apply(simulatedData,2,checkEvent))
+```
+
+
+
+
+
+
+
+
+
+**Example of sum**
+```{r}
+data=c(1,1,1,0,0)
+sum(data)
+sum(data)<3
+mean(data)
+```
+
+**Example of for Loop**
+```{r}
+for (j in c(1:5)){
+  print(j)
+}
+```

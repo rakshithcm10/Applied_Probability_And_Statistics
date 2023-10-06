@@ -1,0 +1,79 @@
+---
+title: "APS Coding Problem Set 1 ( Bats Problem )"
+output:
+  pdf_document: default
+  html_document: default
+date: "2023-08-22"
+---
+
+
+Load the CSV data file 'bats.csv' into the dataframe 'dfBat' and display the first few rows
+
+```{r}
+dfBat= read.csv('Data/bats.csv')
+head(dfBat)
+```
+
+
+
+Display the structure of the dataframe 'dfBat' and its column names
+
+```{r}
+str(dfBat)
+colnames(dfBat)
+```
+
+
+
+Create a vector 'gene_cols' containing the names of selected gene columns
+
+```{r}
+gene_cols = c("Gene.1", "Gene.2", "Gene.3", "Gene.4", "Gene.5", "Ebola")
+```
+
+
+
+
+
+**What is the chance of a random bat carrying the Ebola virus?**
+
+```{r}
+overall_ebola_chance = mean(dfBat$Ebola == TRUE)
+ebola_chance = overall_ebola_chance*100
+ebola_chance
+```
+
+
+
+
+
+**For each gene, calculate the likelihood that it is expressed in a random bat.**
+
+```{r}
+gene_likelihoods = sapply(gene_cols[1:5], function(col_name) {
+  mean(dfBat[[col_name]]) * 100
+})
+gene_likelihoods
+```
+
+
+
+
+
+**Is the presence or absence of any of the genes indicative of a random bat potentially carrying the Ebola virus?**
+
+```{r}
+significant_genes = character(0) # Initialize an empty vector to store gene names
+
+for (gene_col in gene_cols[1:5]) {
+  gene_present_ebola_chance = mean(dfBat$Ebola[dfBat[[gene_col]]] == TRUE)
+  gene_absent_ebola_chance = mean(dfBat$Ebola[!dfBat[[gene_col]]] == TRUE)
+
+  if (abs(gene_present_ebola_chance - overall_ebola_chance) > 0.1 ||
+      abs(gene_absent_ebola_chance - overall_ebola_chance) > 0.1) {
+    significant_genes = c(significant_genes, gene_col)
+  }
+}
+
+significant_genes
+```

@@ -1,0 +1,43 @@
+---
+title: "Coding Problem 2"
+output: pdf_document
+date: "2023-09-02"
+---
+
+
+```{r}
+# Possible outcomes for passengers getting on or off the bus (0 and 1)
+s = c(0, 1)
+```
+
+```{r}
+# Corresponding probabilities for passengers getting on or off
+p_on = c(0.8, 0.2)
+p_off= c(0.5, 0.4, 0.1)
+```
+
+```{r}
+simulate_bus_occupancy = function() {
+  bus_occupancy = 0
+  for (current_stop in 1:10) {
+    # Simulate passengers getting off the bus
+    passengers_getting_off = sum(sample(s, bus_occupancy, replace = TRUE, prob = p_on))
+    bus_occupancy = bus_occupancy - passengers_getting_off
+    
+    # Simulate passengers getting on the bus
+    passengers_getting_on = sample(0:2, size=1, prob = p_off )
+    bus_occupancy = bus_occupancy + passengers_getting_on
+  }
+  return(bus_occupancy)
+}
+```
+
+```{r}
+nsimulation = 100000
+
+simulated_data = replicate(nsimulation, simulate_bus_occupancy())
+
+probability = mean(simulated_data==0) 
+probability
+```
+

@@ -1,0 +1,324 @@
+---
+title: "Graphing Using ggplot"
+output: html_notebook
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+# Load the mpg dataset
+data('mpg')
+mpgData = mpg
+
+# Print the first five rows (or samples) in the data frame
+head(mpgData, 5)
+str(mpgData)
+```
+
+```{r}
+foodData=read.csv('Data/food-texture.csv', header = TRUE, row.names = 1)
+head(foodData,5)
+str(foodData)
+```
+
+```{r}
+#add another column to data frame called taste
+#foodData['Taste']=sample(c('poor','fair','good','very good'), replace=TRUE, nrow(foodData), p=c(0.25,0.25,0.25,0.25))
+```
+
+```{r}
+#write.csv(foodData, 'Data/food-texture.csv')
+```
+
+```{r}
+continuous_cols=c('Oil','Density','Fracture','Hardness')
+categorical_cols=c('Crispy','Taste')
+```
+
+```{r}
+#convert categorical columns to factor type
+foodData[categorical_cols]=lapply(foodData[categorical_cols],factor)
+str(foodData)
+```
+
+
+```{r}
+p=ggplot(data=foodData) + geom_point(aes(x=Oil,y=Density))
+p
+```
+
+```{r}
+p=ggplot(data=foodData) + geom_point(aes(x=Oil,y=Density,color=Crispy))
+p
+```
+
+```{r}
+p=ggplot(data=foodData) + geom_boxplot(aes(x=Crispy,y=Density))
+p
+```
+
+```{r}
+density=foodData$Density
+density_lb=2.2*density
+density_gm=1000*density
+density_MC=density-mean(density)    #mean centering
+```
+
+```{r}
+plot(foodData$Density,foodData$Oil)
+plot(foodData$Density)            #component plot
+plot(density)
+plot(density_MC)
+```
+
+```{r}
+dfDensity=data.frame(cbind(density,density_MC))
+dfDensity
+```
+
+```{r}
+p=ggplot(data=dfDensity) +
+  geom_point(aes(x=c(1:nrow(foodData)),y=density),color="blue") +
+  labs(x='sample number',y='Density(kg/m^3)',title='Component plot of density') +
+  geom_line(aes(x= c(1:nrow(foodData)), y=mean(density)),color="red") +
+  geom_line(aes(x=c(1:nrow(foodData)),y=mean(density)+sd(density)),color="red",linetype='dashed') +
+  geom_line(aes(x=c(1:nrow(foodData)),y=mean(density)-sd(density)),color="red",linetype='dashed')
+p
+```
+
+```{r}
+p=ggplot(data=dfDensity) +
+  geom_point(aes(x=c(1:nrow(foodData)),y=density_MC),color="blue") +
+  labs(x='sample number',y='Density(kg/m^3)',title='Component plot of  MC-density') +
+  geom_line(aes(x= c(1:nrow(foodData)), y=mean(density_MC)),color="red")
+p
+```
+
+```{r}
+density     #density vector
+density-mean(density)   #mean-centered density vector
+(density-mean(density))^2  #squared mean-centered density vector
+mean((density-mean(density))^2) #mean of the squared mean-centered density vector (variance) unit = (kg/m^3)^2
+sqrt(mean((density-mean(density))^2)) #standard deviation unit = kg/m^3
+
+var(density)
+sd(density)
+```
+
+```{r}
+z_density=(density-mean(density))/sd(density)
+print(z_density)
+(density_lb-mean(density_lb))/sd(density_lb)
+(density_gm-mean(density_gm))/sd(density_gm)
+```
+
+```{r}
+scale(density)
+scale(density_lb)
+scale(density_gm)
+```
+
+```{r}
+scale(foodData[continuous_cols])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+density10=foodData[foodData['Crispy']==10, ]$Density
+mean(density10)
+density10-mean(density10)        #unit = kg/m^3
+(density10-mean(density10))^2  #square mean density. / unit = (kg/m^3)^2
+mean((density10-mean(density10))^2)   #variance is the mean of square mean density. / unit = (kg/m^3)^2
+sqrt(mean((density10-mean(density10))^2))   #standard deviation / unit = kg/m^3
+
+
+var(density10) 
+sd(density10)
+```
+
+```{r}
+mean(density10<=median(density10))
+sum(density10<=median(density10))*100
+mean(density10<=median(density10))*100 #50% density value that is medain
+median(density10)
+mean(density10)
+
+quantile(density10,0.25)  #25% density value
+quantile(density10,0.5)
+quantile(density10,0.75)
+
+quantile(density10,0.75)-quantile(density10,0.25) #IQR.  Inter Quartile range
+```
+
+```{r}
+density13=foodData[foodData['Crispy']==13, ]$Density
+mean(density13)
+density13-mean(density13)        #unit = kg/m^3
+(density13-mean(density13))^2  #square mean density. / unit = (kg/m^3)^2
+mean((density13-mean(density13))^2)   #variance is the mean of square mean density. / unit = (kg/m^3)^2
+sqrt(mean((density13-mean(density13))^2))   #standard deviation / unit = kg/m^3
+
+
+var(density13) 
+sd(density13)
+```
+
+```{r}
+mean(density13<=median(density13))
+sum(density13<=median(density13))*100
+mean(density13<=median(density13))*100 #50% density value that is medain
+median(density13)
+mean(density13)
+
+quantile(density13,0.25)  #25% density value
+quantile(density13,0.5)
+quantile(density13,0.75)
+
+quantile(density13,0.75)-quantile(density13,0.25) #IQR
+```
+
+
+```{r}
+p=ggplot(data=foodData[foodData$Crispy==13,])+geom_histogram(aes(x=Density),binwidth = 100,color='blue')
+p
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# Initiate the ggplot() function binding to the car data frame
+ggplot(data = mpgData)
+
+# Create a plot object
+p1 = ggplot(data = mpgData)
+
+# Use the aes() function to specify the aesthetic mapping, that is, which variables
+# should be plotted
+p1 = ggplot(data = mpgData, aes(x = disp, y = hwy))
+
+# Use the geom_ type functions to add geometric elements
+p1 = ggplot(data = mpgData, aes(x = displ, y = hwy)) +
+  geom_point()
+
+# Add labels and title
+p1 = p1 + labs(x = 'Displacement (litres)', y = 'Mileage (MPG)', title = 'Mileage vs. Displacement')
+p1
+```
+
+
+```{r}
+read.csv('Data/bodyfat.csv')
+p1=ggplot(data = p, aes(x = Weight, y = Bodyfat))
+p1=ggplot(data = p, aes(x = Weight, y = Bodyfat, color=Gender)) +
+  geom_point()
+p1 = p1 + labs(x = 'Weight (kg)', y = 'Bodyfat', title = 'Weight vs. Bodyfat')
+p1
+
+```
+
+
+
+
+```{r}
+# Map aesthetics to variables
+
+# Map the color aesthetic to the class variable
+p2 = ggplot(data = mpgData) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+p2
+```
+
+```{r}
+# Map aesthetics to variables
+
+# Map the size (or alpha or shape) aesthetic to the class variable
+p3 = ggplot(data = mpgData) +
+  geom_point(aes(x = displ, y = hwy,color=class,shape=drv))
+  p3 = p3 + labs(x = 'Displacement (litres)', y = 'Mileage (MPG)', title = 'Mileage   vs. Displacement')
+p3
+```
+
+```{r}
+# Set aesthetic manually
+
+# Mark the points blue in color, square in shape, and fixed size
+p4 = ggplot(data = mpgData) +
+  geom_point(aes(x = displ, y = hwy,color='red',size=1))
+p4
+```
+
+```{r}
+# Add additional variables using facets
+
+# Plot mileage w.r.t. each class individually
+ggplot(data = mpgData) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(, nrow = 2)
+```
+
+```{r}
+# Plot mileage w.r.t drive train and number of cylinders
+ggplot(data = mpgData) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid()
+```
+
+```{r}
+# A quick exercise on facet plotting with filtering of samples
+# Investigate the number of levels in the cyl feature
+factor()
+
+# How many cars of each cyl type are there?
+mpgData %>% 
+
+# Filter samples with 3 and 5 cylinder cars (which are very rare)
+# mpgData = mpgData %>% filter(!(? %in% c(?, ?)))
+# 
+# head(mpgData, 5)
+# 
+# # Map the color aesthetic to the cyl variable
+# p5 = ggplot(data = mpgData) +
+#   geom_point(mapping = aes(x = displ, y = hwy))
+# p5
+```
+
+
